@@ -1,0 +1,37 @@
+<!doctype html>
+<html ng-app="albumsApp">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <link rel="stylesheet" type="text/css" href="stylesheets/all.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/albums.css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <title>albums</title>
+</head>
+
+<body ng-controller="albumsController as albums">
+    <button ng-click=changeview(true)>排列1</button>
+    <button ng-click="changeview(false)">排列2</button>
+    <div ng-show="isinline">
+        <div class="row">
+            <div class="col-xs-6 col-md-3" ng-repeat="item in apidata.data.data.pins">
+                <a href="#" class="thumbnail">
+                    <img src="{{item.images['237x'].url}}" class="test1" >
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="abgne-block" ng-hide="isinline">
+        <ul>
+            <li ng-repeat="item in apidata.data.data.pins">
+                <a href="#"><img src="{{item.images['237x'].url}}" width="50" height="60" /></a>
+            </li>
+        </ul>
+    </div>
+</body>
+
+</html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.js"></script>
+<script type="text/javascript" src="javascripts/albumsController.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.3.js"></script>
