@@ -1,8 +1,8 @@
 /* 
  * @Author: Hal-Mac
  * @Date:   2015-07-30 21:56:40
- * @Last Modified by:   Hal-Mac
- * @Last Modified time: 2015-08-02 21:27:54
+ * @Last Modified by:   Hal1124
+ * @Last Modified time: 2015-08-04 11:28:40
  */
 
 'use strict';
@@ -24,48 +24,7 @@ dataOptionModule.controller('dataOptionController', ['$scope', '$window',
         };
 
         $scope.dataListTemp = [];
-        $scope.dataList = [{
-            name: 'a',
-            haves: '4',
-            money: '100',
-            reserveDatetime: '',
-            phone: '',
-            email: '',
-            point: '',
-            isEdit: false,
-            isDelete: false
-        }, {
-            name: 'b',
-            haves: '2',
-            money: '20',
-            reserveDatetime: '',
-            phone: '',
-            email: '',
-            point: '',
-            isEdit: false,
-            isDelete: false
-        }, {
-            name: 'c',
-            haves: '150',
-            money: '3',
-            reserveDatetime: '',
-            phone: '',
-            email: '',
-            point: '',
-            isEdit: false,
-            isDelete: false
-        }, {
-            name: 'd',
-            haves: '200',
-            money: '1',
-            reserveDatetime: '',
-            phone: '',
-            email: '',
-            point: '',
-            isEdit: false,
-            isDelete: false
-        }];
-
+        $scope.dataList = [];
 
 
 
