@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <link rel="stylesheet" type="text/css" href="stylesheets/all.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/albums.css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/bootstrap-datepicker.css">
+    <title>DataOption</title>
+</head>
+
+<body ng-app="dataOptionApp" id="dataOptionApp" ng-controller="dataOptionController as dataOption">
+    <button class="btn btn-default" ng-click="changePage(1)">新增資料</button>
+    <button class="btn btn-default" ng-click="changePage(2)">列表</button>
+    <button class="btn btn-default" ng-click="deleteData()">刪除</button>
+    <input type="text" ng-model="keyword">
+    <button class="btn btn-default" ng-click="serach()">查詢</button>
+    <form name="AddForm" ng-submit="Add(data)">
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <div id="AddData" ng-if="isAdd">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <div class="input-group">
+                    <span class="input-group-addon">訂票人:</span>
+                    <input type="text" class="form-control" name="name" ng-model="data.name" value="" required/>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon">人數:</span>
+                    <input type="number" max="4" min="1" class="form-control" name="haves" ng-model="data.haves" value="" required/>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon">訂票金額:</span>
+                    <input type="number" class="form-control" name="money" ng-model="data.money" value="" required/>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon">訂票日期:</span>
+                    <input type="dataitem" bootstrap-datepicker data-provide="datepicker" class="form-control datepicker" name="reserveDatetime" ng-model="data.reserveDatetime" value="" required/>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon">電話:</span>
+                    <input type="text" class="form-control" name="phone" ng-model="data.phone" value="" required/>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon">Email:</span>
+                    <input type="email" class="form-control" placeholder="Email" ng-model="data.email" required/>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon">位置:</span>
+                    <input type="text" class="form-control" name="point" ng-model="data.point" value="" required />
+                </div>
+                <input type="submit" class="btn btn-default" ng-disabled="AddForm.$invalid" />
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+    </form>
+    <div class="col-md-2"></div>
+    <div id="dataList" class="col-md-8" ng-if="isList">
+        <table class="table table-striped">
+            <tr>
+                <th>
+                    <input type="checkbox" id="allcheck">
+                </th>
+                <th>
+                    <div class="tabletitle" ng-click="Sort(0)">訂票人<span ng-class="{true:'glyphicon-chevron-up',false:'glyphicon-chevron-down'}[isname]" aria-hidden="true"></span></div>
+                </th>
+                <th>
+                    <div class="tabletitle" ng-click="Sort(1)">人數<span ng-class="{true:'glyphicon-chevron-up',false:'glyphicon-chevron-down'}[ishaves]" aria-hidden="true"></span></div>
+                </th>
+                <th>
+                    <div class="tabletitle" ng-click="Sort(2)">訂票金額<span ng-class="{true:'glyphicon-chevron-up',false:'glyphicon-chevron-down'}[ismoney]" aria-hidden="true"></span></div>
+                </th>
+                <th>
+                    <div class="tabletitle" ng-click="Sort(3)">訂票日期<span ng-class="{true:'glyphicon-chevron-up',false:'glyphicon-chevron-down'}[isreserveDatetime]" aria-hidden="true"></span></div>
+                </th>
+                <th>電話</th>
+                <th>email</th>
+                <th>位置</th>
+                <th>操作</th>
+            </tr>
+            <tr ng-repeat="item in dataList">
+                <td>
+                    <input type="checkbox" ng-model="item.isDelete">
+                </td>
+                <td>
+                    <span ng-bind="item.name" ng-if="!item.isEdit"></span>
+                    <input type="text" ng-model="item.name" ng-if="item.isEdit" value="item.name">
+                </td>
+                <td>
+                    <span ng-bind="item.haves" ng-if="!item.isEdit"></span>
+                    <input type="number" max="4" min="1" ng-model="item.haves" value="item.haves" ng-if="item.isEdit">
+                </td>
+                <td>
+                    <span ng-bind="item.money | currency:undefined:0" ng-if="!item.isEdit"></span>
+                    <input type="number" ng-model="item.money" ng-if="item.isEdit" value="item.money">
+                </td>
+                <td>
+                    <span ng-bind="item.reserveDatetime | datetime" ng-if="!item.isEdit"></span>
+                    <input type="datetime" ng-model="item.reserveDatetime" ng-if="item.isEdit" value="item.reserveDatetime">
+                </td>
+                <td>
+                    <span ng-bind="item.phone" ng-if="!item.isEdit"></span>
+                    <input type="text" ng-model="item.phone" ng-if="item.isEdit" value="item.phone">
+                </td>
+                <td>
+                    <span ng-bind="item.email" ng-if="!item.isEdit"></span>
+                    <input type="emial" ng-model="item.email" ng-if="item.isEdit" value="item.email">
+                </td>
+                <td>
+                    <span ng-bind="item.point" ng-if="!item.isEdit"></span>
+                    <input type="text" ng-model="item.point" ng-if="item.isEdit" value="item.point">
+                </td>
+                <td>
+                    <button ng-click="editData(item,true)" ng-if="!item.isEdit">修改</button>
+                    <button ng-click="editData(item,false)" ng-if="item.isEdit">完成</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="col-md-2"></div>
+</body>
+
+</html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+<script type="text/javascript" src="javascripts/jquery.linq.min.js"></script>
+<script type="text/javascript" src="javascripts/linq.min.js"></script>
+<script type="text/javascript" src="javascripts/DataOption.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="javascripts/bootstrap-datepicker.js"></script>
+<script type="text/javascript">
+$(function() {
+    window.initglyphicon();
+    $('.datepicker').datepicker({
+        format: 'yyyy/mm/dd'
+    })
+    // $('.tabletitle').click(function() {
+    //      window.reOn(this);
+
+    // });
+
+    // function reOn(elm) {
+    //     var $this = elm;
+    //     var chevron = $($this).children('span').attr('class');
+    //     var isUp = 'glyphicon-chevron-up';
+    //     //console.log(chevron);
+    //     // console.log(chevron.indexOf('glyphicon-chevron-up'));
+    //     if (chevron !== undefined) {
+    //         if (chevron.match('glyphicon-chevron-up') !== null) {
+    //             isUp = 'glyphicon-chevron-down';
+    //         }
+    //     }
+    //     console.log(isUp);
+    //     $('.tabletitle').children('span').removeAttr('class');
+    //     //.removeClass('glyphicon-chevron-up').removeClass('glyphicon','glyphicon-chevron-down'');
+    //     $($this).children('span').addClass('glyphicon ' + isUp);
+    // }
+});
+
+function initglyphicon() {
+    $('.tabletitle').children('span').removeAttr('class');
+}
+// function reOn(elm) {
+//     var $this = elm;
+//     var chevron = $($this).children('span').attr('class');
+//     var isUp = 'glyphicon-chevron-up';
+//     //console.log(chevron);
+//     // console.log(chevron.indexOf('glyphicon-chevron-up'));
+//     if (chevron !== undefined) {
+//         if (chevron.match('glyphicon-chevron-up') !== null) {
+//             isUp = 'glyphicon-chevron-down';
+//         }
+//     }
+//     console.log(isUp);
+//     $('.tabletitle').children('span').removeAttr('class');
+//     //.removeClass('glyphicon-chevron-up').removeClass('glyphicon','glyphicon-chevron-down'');
+//     $($this).children('span').addClass('glyphicon ' + isUp);
+// }
+</script>
