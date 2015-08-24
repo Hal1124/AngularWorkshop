@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>
+    <script type="text/javascript" src="../javascripts/libs/jquery-1.10.1.min.js"></script>
+    <script type="text/javascript" src="../javascripts/jquery.linq.min.js"></script>
+    <script type="text/javascript" src="../javascripts/linq.min.js"></script>
+    <!-- <script src="../javascripts/libs/gumby.init.js"></script>
+    <script src="../javascripts/libs/gumby.min.js"></script>
+    <script type="text/javascript" src="../javascripts/main.js"></script>
+    <script type="text/javascript" src="../javascripts/plugins.js"></script> -->
+    <script type="text/javascript" src="../javascripts/TicTacToe.js"></script>
+    <link rel="stylesheet" href="../stylesheets/gumby.css">
+</head>
+
+<body ng-app="tictactoeApp" ng-controller="tictactoeController">
+    <div class="row">
+        <!-- <label for="gofist">先行：</label>
+        <select id="gofirst" ng-model="select1" ng-options="m.text for m in whogofirst">
+            <option value="">--請選擇--</option>
+        </select> -->
+    </div>
+    <div class="row">
+        <div class="four columns" style="width:250px; height:250px;" ng-click="savecheck(0)">
+            <img src="../images/o.jpg" ng-if="Frames[0] == 1">
+            <img src="../images/x.jpg" ng-if="Frames[0] == 2">
+        </div>
+        <div class="four columns" style="width:250px; height:250px;" ng-click="savecheck(1)">
+            <img src="../images/o.jpg" ng-if="Frames[1] == 1">
+            <img src="../images/x.jpg" ng-if="Frames[1] == 2">
+        </div>
+        <div class="four columns" style="width:250px; height:250px;" ng-click="savecheck(2)">
+            <img src="../images/o.jpg" ng-if="Frames[2] == 1">
+            <img src="../images/x.jpg" ng-if="Frames[2] == 2">
+        </div>
+    </div>
+    <div class="row">
+        <div class="four columns" style="width:250px; height:250px; border-top:10px solid #000;" ng-click="savecheck(3)">
+            <img src="../images/o.jpg" ng-if="Frames[3] == 1">
+            <img src="../images/x.jpg" ng-if="Frames[3] == 2">
+        </div>
+        <div class="four columns" style="width:250px; height:250px; border-top:10px solid #000;" ng-click="savecheck(4)">
+            <img src="../images/o.jpg" ng-if="Frames[4] == 1">
+            <img src="../images/x.jpg" ng-if="Frames[4] == 2">
+        </div>
+        <div class="four columns" style="width:250px; height:250px; border-top:10px solid #000;" ng-click="savecheck(5)">
+            <img src="../images/o.jpg" ng-if="Frames[5] == 1">
+            <img src="../images/x.jpg" ng-if="Frames[5] == 2">
+        </div>
+    </div>
+    <div class="row">
+        <div class="four columns" style="width:250px; height:250px; border-top:10px solid #000;" ng-click="savecheck(6)">
+            <img src="../images/o.jpg" ng-if="Frames[6] == 1">
+            <img src="../images/x.jpg" ng-if="Frames[6] == 2">
+        </div>
+        <div class="four columns" style="width:250px; height:250px; border-top:10px solid #000;" ng-click="savecheck(7)">
+            <img src="../images/o.jpg" ng-if="Frames[7] == 1">
+            <img src="../images/x.jpg" ng-if="Frames[7] == 2">
+        </div>
+        <div class="four columns" style="width:250px; height:250px; border-top:10px solid #000;" ng-click="savecheck(8)">
+            <img src="../images/o.jpg" ng-if="Frames[8] == 1">
+            <img src="../images/x.jpg" ng-if="Frames[8] == 2">
+        </div>
+    </div>
+</body>
+
+</html>
